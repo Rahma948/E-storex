@@ -119,15 +119,16 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       builder: (context, child) {
-        return MaterialApp(
-          navigatorKey: widget.navigatorKey,
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-          onGenerateRoute: _router.generateRoute,
-          initialRoute: Routes.login,
-        );
+         return MaterialApp(
+  navigatorKey: widget.navigatorKey,
+  debugShowCheckedModeBanner: false,
+  theme: AppTheme.lightTheme(context),
+  darkTheme: AppTheme.darkTheme(context),
+  themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+  onGenerateRoute: _router.generateRoute,
+  initialRoute: Routes.home,
+);
+
       },
     );
   }

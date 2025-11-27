@@ -1,7 +1,10 @@
 class ApiConstants {
   static const String baseUrl = 'https://estorex.runasp.net/api/v1';
 
-  //Endpoints
+  // Endpoints
+  static const String categories = '/categories';
+  static const String products = '/products';
+  static const String baskets = '/Baskets';
 
   //Auth/api/v1/Account/external-login
   static const String register = '/account/register';

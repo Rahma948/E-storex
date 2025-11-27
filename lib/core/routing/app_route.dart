@@ -7,11 +7,14 @@ import 'package:e_storex/feature/auth/login/ui/screens/login_screen.dart';
 import 'package:e_storex/feature/auth/register/logic/cubit/register_cubit.dart';
 import 'package:e_storex/feature/auth/register/ui/screens/register_screen.dart';
 import 'package:e_storex/feature/auth/forgetPass/ui/forget_password.dart';
+import 'package:e_storex/feature/home/data/repos/home_repo.dart';
+import 'package:e_storex/feature/home/logic/cubit/home_cubit.dart';
+import 'package:e_storex/feature/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
-  Route<dynamic> generateRoute(RouteSettings settings) {
+  Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.login:
         return MaterialPageRoute(
@@ -29,8 +32,14 @@ class AppRouter {
         );
       case Routes.home:
         return MaterialPageRoute(
-          builder: (_) => Scaffold(appBar: AppBar(title: const Text('Home'))),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                HomeCubit(getIt<HomeRepo>())
+                  ..getHomeData(), // << يبدأ يجيب الداتا
+            child: const HomeScreen(),
+          ),
         );
+
       case Routes.forgetPassword:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -42,10 +51,11 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ConfirmationMailScreen());
       default:
         print('🚨 Unknown route name: ${settings.name}');
-        return MaterialPageRoute(
-          builder: (_) =>
-              Scaffold(body: Center(child: Text('Not Found$settings'))),
-        );
+        return null;
+      // return MaterialPageRoute(
+      //   builder: (_) =>
+      //       Scaffold(body: Center(child: Text('Not Found$settings'))),
+      // );
     }
   }
 }

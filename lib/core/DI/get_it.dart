@@ -7,6 +7,7 @@ import 'package:e_storex/feature/auth/login/data/repos/login_repo.dart';
 import 'package:e_storex/feature/auth/login/logic/cubit/login_cubit.dart';
 import 'package:e_storex/feature/auth/register/data/register_repo.dart';
 import 'package:e_storex/feature/auth/register/logic/cubit/register_cubit.dart';
+import 'package:e_storex/feature/home/data/repos/home_repo.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -26,6 +27,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<ForgetPassRepo>(
     () => ForgetPassRepo(getIt<EstorexApiService>()),
   );
+getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt<EstorexApiService>()));
 
   // ✅ Cubits Factories
   getIt.registerFactory<RegisterCubit>(
